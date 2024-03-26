@@ -7,6 +7,7 @@ git status
 ```
 git log --oneline
 git log
+git log --oneline --graph --all --decorate
 ```
 
 # List all files in the repository

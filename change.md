@@ -19,10 +19,7 @@ git push origin branch-name
 git pull origin branch-name
 ```
 
-# View the commit history
-```
-git log
-```
+
 
 # Discard changes in a file
 ```
@@ -37,24 +34,4 @@ git revert commit-hash
 # Remove a file from the repository
 ```
 git rm file-name
-```
-
-# Clone a remote repository
-```
-git clone repository-url
-```
-
-# Create a new branch
-```
-git branch new-branch
-```
-
-# Switch to a different branch
-```
-git checkout branch-name
-```
-
-# Merge changes from one branch into another
-```
-git merge branch-name
 ```
