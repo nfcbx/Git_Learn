@@ -6,6 +6,7 @@ git add .
 # Commit changes to the repository
 ```
 git commit -m "Initial commit"
+git commit -a -m "Initial commit"  # Add all changes, then commit. For changed files only.
 ```
 
 
@@ -35,3 +36,12 @@ git revert commit-hash
 ```
 git rm file-name
 ```
+
+# Reset the repository to a previous commit
+```
+git reset --hard commit-hash
+git reset --hard HEAD~1  # Reset to the previous commit
+git reset --hard HEAD~2  # Reset to the commit before the previous commit
+git reset --soft
+git reset --mixed # default
+~~~
