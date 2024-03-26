@@ -44,4 +44,4 @@ git reset --hard HEAD~1  # Reset to the previous commit
 git reset --hard HEAD~2  # Reset to the commit before the previous commit
 git reset --soft
 git reset --mixed # default
-~~~
+```
