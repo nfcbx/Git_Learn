@@ -252,4 +252,3 @@ rules:
   - RULE-SET,telegramcidr,🔰 选择节点
   - GEOIP,LAN,DIRECT
   - GEOIP,CN,DIRECT
-  - MATCH,🔰 选择节点
