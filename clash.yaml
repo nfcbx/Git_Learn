@@ -244,12 +244,12 @@ rules:
   - RULE-SET,reject,REJECT
   - RULE-SET,icloud,DIRECT
   - RULE-SET,apple,DIRECT
-  - RULE-SET,google,PROXY
-  - RULE-SET,proxy,PROXY
+  - RULE-SET,google,🔰 选择节点
+  - RULE-SET,proxy,🔰 选择节点
   - RULE-SET,direct,DIRECT
   - RULE-SET,lancidr,DIRECT
   - RULE-SET,cncidr,DIRECT
-  - RULE-SET,telegramcidr,PROXY
+  - RULE-SET,telegramcidr,🔰 选择节点
   - GEOIP,LAN,DIRECT
   - GEOIP,CN,DIRECT
-  - MATCH,PROXY
+  - MATCH,🔰 选择节点
