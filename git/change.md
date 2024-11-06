@@ -13,7 +13,9 @@ git commit -a -m "Initial commit"  # Add all changes, then commit. For changed f
 # Push changes to a remote repository
 ```
 git push origin branch-name
+git push origin --force
 ```
+
 
 # Pull changes from a remote repository
 ```
@@ -45,3 +47,5 @@ git reset --hard HEAD~2  # Reset to the commit before the previous commit
 git reset --soft
 git reset --mixed # default
 ```
+
+git remote -v
