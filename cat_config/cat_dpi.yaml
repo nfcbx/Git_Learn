@@ -199,7 +199,7 @@ rules:
   - DST-PORT,8001,Switch # UDP
   - DST-PORT,8080,Switch
   - DST-PORT,14000,Switch
-  
+
   - RULE-SET,applications,DIRECT
   - DOMAIN,clash.razord.top,DIRECT
   - DOMAIN,yacd.haishan.me,DIRECT
@@ -271,7 +271,7 @@ rule-providers:
     url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt"
     path: ./ruleset/Loyalsoldier/direct.yaml
     interval: 86400
-# 
+
   private:
     type: http
     behavior: domain

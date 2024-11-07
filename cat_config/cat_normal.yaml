@@ -36,7 +36,7 @@ log-level: info
 # clash 的 RESTful API 监听地址
 external-controller: 127.0.0.1:9090
 
-global-ua: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+# global-ua: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 # 存放配置文件的相对路径，或存放网页静态资源的绝对路径
 # Clash core 将会将其部署在 http://{{external-controller}}/ui
@@ -67,7 +67,7 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter-mode: blacklist
-  fake-ip-filter: ['*.lan', '*.linksys.com', '*.linksyssmartwifi.com', 'swscan.apple.com', 'mesu.apple.com', '*.msftconnecttest.com', '*.msftncsi.com', 'time.*.com', 'time.*.gov', 'time.*.edu.cn', 'time.*.apple.com', 'time1.*.com', 'time2.*.com', 'time3.*.com', 'time4.*.com', 'time5.*.com', 'time6.*.com', 'time7.*.com', 'ntp.*.com', 'ntp.*.com', 'ntp1.*.com', 'ntp2.*.com', 'ntp3.*.com', 'ntp4.*.com', 'ntp5.*.com', 'ntp6.*.com', 'ntp7.*.com', '*.time.edu.cn', '*.ntp.org.cn', '+.pool.ntp.org', 'time1.cloud.tencent.com]
+  fake-ip-filter: ['*.lan', '*.linksys.com', '*.linksyssmartwifi.com', 'swscan.apple.com', 'mesu.apple.com', '*.msftconnecttest.com', '*.msftncsi.com', 'time.*.com', 'time.*.gov', 'time.*.edu.cn', 'time.*.apple.com', 'time1.*.com', 'time2.*.com', 'time3.*.com', 'time4.*.com', 'time5.*.com', 'time6.*.com', 'time7.*.com', 'ntp.*.com', 'ntp.*.com', 'ntp1.*.com', 'ntp2.*.com', 'ntp3.*.com', 'ntp4.*.com', 'ntp5.*.com', 'ntp6.*.com', 'ntp7.*.com', '*.time.edu.cn', '*.ntp.org.cn', '+.pool.ntp.org', 'time1.cloud.tencent.com']
   default-nameserver: [223.5.5.5, 223.6.6.6, 119.29.29.29, 1.12.12.12, 120.53.53.53]
   nameserver:
     # - 192.168.123.190
@@ -104,7 +104,7 @@ proxy-providers:
       expected-status: 204
 #--------------------------------------------------------------------------------------#
 proxy-groups:
-  - name: "Switch"
+  - name: "🔰 选择节点"
     type: select
     proxies:
       - DIRECT
@@ -116,39 +116,55 @@ proxy-groups:
     type: select
     proxies:
       - DIRECT
-      - Switch
+      - 🔰 选择节点
     url: http://connectivitycheck.platform.hicloud.com/generate_204
+
   - name: "📕 学术网站"
     type: select
     proxies:
       - DIRECT
-      - Switch
+      - 🔰 选择节点
     url: http://connectivitycheck.platform.hicloud.com/generate_204
+
+  - name: "🔒 深度包检测"
+    type: select
+    proxies:
+      - DIRECT
+      - 🔰 选择节点
+    use:
+      - Global-ISP
+    url: http://connectivitycheck.platform.hicloud.com/generate_204
+
   - name: "🎞️ 爱奇艺&哔哩哔哩"
     type: select
     proxies:
       - DIRECT
+      - 🔰 选择节点
     filter: "(^(?!.*?(Premium)).*(香港|Hong Kong|HK))|^(?!.*?(Premium)).*(台湾|Taiwan|TW)"
     use:
       - Global-ISP
     url: https://www.gstatic.com/generate_204
+
   - name: "☁️ OneDrive"
     type: select
     proxies:
+      - 🔰 选择节点
       - DIRECT
     use:
       - Global-ISP
     url: https://www.gstatic.com/generate_204
+
   - name: "🛑 拦截广告"
     type: select
     proxies:
       - REJECT
       - DIRECT
-      - Switch
+      - 🔰 选择节点
+
   - name: "🐟 漏网之鱼"
     type: select
     proxies:
-      - Switch
+      - 🔰 选择节点
       - DIRECT
   # - name: "HongKong"
   #   type: select
@@ -191,32 +207,48 @@ proxy-groups:
 
 rules:
   - RULE-SET,applications,DIRECT
+  - RULE-SET,my_rules_DIRECT,DIRECT
+  - RULE-SET,my_dpi,🔒 深度包检测
+  - RULE-SET,my_scholar,📕 学术网站                #  my_scholar
   - DOMAIN,clash.razord.top,DIRECT
   - DOMAIN,yacd.haishan.me,DIRECT
-  - RULE-SET,my_academic,📕 学术网站                #  my_academic
   - RULE-SET,private,DIRECT                         #  路由器
   - RULE-SET,reject,🛑 拦截广告
   - RULE-SET,icloud,DIRECT
   - RULE-SET,apple,DIRECT
-  - RULE-SET,google,Switch
-  - RULE-SET,Onedrive,Switch
-  - RULE-SET,proxy,Switch
+  - RULE-SET,google,🔰 选择节点
+  - RULE-SET,Onedrive,🔰 选择节点
+  - RULE-SET,proxy,🔰 选择节点
   - RULE-SET,BiliBili,🎞️ 爱奇艺&哔哩哔哩             #
   - RULE-SET,iQIYI,🎞️ 爱奇艺&哔哩哔哩                #
   - RULE-SET,direct,🇨🇳 国内网站                      #
-  - RULE-SET,lancidr,DIRECT
+  - RULE-SET,lancidr,DIRECT                          #  局域网段
   - RULE-SET,cncidr,🇨🇳 国内网站                      #
-  - RULE-SET,telegramcidr,Switch
+  - RULE-SET,telegramcidr,🔰 选择节点
   - GEOIP,LAN,DIRECT
   - GEOIP,CN,🇨🇳 国内网站                             #
   - MATCH,🐟 漏网之鱼
 
 rule-providers:
-  my_academic:
+  my_dpi:
     type: http
-    behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/nfcbx/Git_Learn@main/cat_config/rules/my_academic.txt"
-    path: ./ruleset/my_academic.yaml
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/nfcbx/Git_Learn@main/cat_config/rules/my_dpi.yaml"
+    path: ./ruleset/my_dpi.yaml
+    interval: 86400
+
+  my_rules_DIRECT:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/nfcbx/Git_Learn@main/cat_config/rules/my_rules_DIRECT.yaml"
+    path: ./ruleset/my_rules_DIRECT.yaml
+    interval: 86400
+
+  my_scholar:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/nfcbx/Git_Learn@main/cat_config/rules/my_scholar.yaml"
+    path: ./ruleset/my_scholar.yaml
     interval: 86400
 #--------------------------------------------------------------------------------------#
 # from https://github.com/Loyalsoldier/clash-rules
@@ -261,7 +293,7 @@ rule-providers:
     url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt"
     path: ./ruleset/Loyalsoldier/direct.yaml
     interval: 86400
-# 
+
   private:
     type: http
     behavior: domain
@@ -318,12 +350,14 @@ rule-providers:
     url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/OneDrive/OneDrive.yaml"
     path: ./ruleset/blackmatrix7/Onedrive.yaml
     interval: 86400
+
   BiliBili:
     type: http
     behavior: classical
     url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/BiliBili/BiliBili.yaml"
     path: ./ruleset/blackmatrix7/BiliBili.yaml
     interval: 86400
+
   iQIYI:
     type: http
     behavior: classical
