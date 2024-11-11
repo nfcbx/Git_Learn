@@ -8,8 +8,8 @@ socks-port: 7891
 mixed-port: 7892
 
 # redirect 端口仅限 Linux(Android) 以及 macOS 适用，tproxy 端口仅限 linux(Android) 适用
-# redir-port: 7892
-# tproxy-port: 7893
+redir-port: 9797
+tproxy-port: 9898
 
 # 本地 SOCKS5/HTTP(S) 服务验证
 # authentication:
@@ -62,6 +62,7 @@ external-controller: 127.0.0.1:9090
 #--------------------------------------------------------------------------------------#
 dns:
   enable: true
+  listen: 0.0.0.0:1053
   use-hosts: true
   prefer-h3: true
   enhanced-mode: fake-ip
@@ -93,7 +94,7 @@ proxy-providers:
   Global-ISP:
     type: http
     url: ""
-    interval: 3600
+    interval: 7200
     path: "./Proxy-Providers/Global-ISP.yaml"
     health-check:
       enable: true
@@ -160,7 +161,7 @@ proxy-groups:
       - DIRECT
       - 🔰 选择节点
     url: http://connectivitycheck.platform.hicloud.com/generate_204
-
+    
   - name: "🛑 拦截广告"
     type: select
     proxies:
@@ -208,6 +209,7 @@ proxy-groups:
   #     - Global-ISP
   #   url: https://www.gstatic.com/generate_204
   #   interval: 300
+
 #--------------------------------------------------------------------------------------#
 rules:
   - RULE-SET,applications,DIRECT
@@ -382,3 +384,5 @@ rule-providers:
     url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/iQIYI/iQIYI.yaml"
     path: ./ruleset/blackmatrix7/iQIYI.yaml
     interval: 86400
+
+external-ui: ./dashboard

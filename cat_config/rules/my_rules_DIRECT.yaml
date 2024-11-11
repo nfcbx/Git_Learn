@@ -1,2 +1,4 @@
 payload:
+  - DOMAIN,clash.razord.top
+  - DOMAIN,yacd.haishan.me
   - IP-CIDR,202.114.177.0/24
