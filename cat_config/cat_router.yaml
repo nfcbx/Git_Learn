@@ -36,55 +36,75 @@ proxies:
   #   ca-str: "xyz"
 #--------------------------------------------------------------------------------------#
 proxy-providers:
-  # Global-ISP:
-  #   type: http
-  #   url: ""
-  #   interval: 3600
-  #   path: "./Proxy-Providers/Global-ISP.yaml"
-  #   health-check:
-  #     enable: true
-  #     url: https://www.gstatic.com/generate_204
-  #     timeout: 5000
-  #     lazy: true
-  #     expected-status: 204
+  Global-ISP:
+    type: http
+    url: ""
+    interval: 3600
+    path: "./Proxy-Providers/Global-ISP.yaml"
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      timeout: 5000
+      lazy: true
+      expected-status: 204
 #--------------------------------------------------------------------------------------#
 proxy-groups:
   - name: "🔰 选择节点"
     type: select
     proxies:
       - ua3f
+      # - 607
       - DIRECT
-    # use:
-    #   - Global-ISP
+    use:
+      - Global-ISP
     url: https://www.gstatic.com/generate_204
     interval: 300
 
   - name: "🔒 深度包检测"
     type: select
     proxies:
+      # - 607
+      - ua3f
       - DIRECT
-      - 🔰 选择节点
     url: http://connectivitycheck.platform.hicloud.com/generate_204
 
   - name: "🐧 腾讯QQ&Wechat"
     type: select
     proxies:
+      # - 607
+      - ua3f
       - DIRECT
-      - 🔰 选择节点
     url: https://www.gstatic.com/generate_204
 
-  - name: "🛑 拦截广告"
+  - name: "📕 学术网站"
     type: select
     proxies:
-      - REJECT
+      - ua3f
+      # - 607
       - DIRECT
       - 🔰 选择节点
+    use:
+      - Global-ISP
+    url: http://connectivitycheck.platform.hicloud.com/generate_204
+
+  # - name: "🛑 拦截广告"
+  #   type: select
+  #   proxies:
+  #     - REJECT
+  #     - DIRECT
+  #     - 🔰 选择节点
 #--------------------------------------------------------------------------------------#
 rules:
   - PROCESS-NAME,ua3f,DIRECT
+  - RULE-SET,my_rules_DIRECT,ua3f
+  - RULE-SET,my_rules_Proxy,🔰 选择节点
   - RULE-SET,my_dpi,🔒 深度包检测
   - RULE-SET,my_tencent,🐧 腾讯QQ&Wechat
-  - RULE-SET,reject,🛑 拦截广告
+  - RULE-SET,my_scholar,📕 学术网站                #  my_scholar
+  # - RULE-SET,reject,🛑 拦截广告
+  - RULE-SET,tld-not-cn,🔰 选择节点
+  - RULE-SET,gfw,🔰 选择节点
+  - RULE-SET,telegramcidr,🔰 选择节点
   - NETWORK,udp,DIRECT
   - MATCH,ua3f
 #--------------------------------------------------------------------------------------#
@@ -95,6 +115,24 @@ rule-providers:
     url: "https://cdn.jsdelivr.net/gh/nfcbx/Git_Learn@main/cat_config/rules/my_dpi.yaml"
     path: ./ruleset/my/dpi.yaml
     interval: 86400
+  my_rules_DIRECT:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/nfcbx/Git_Learn@main/cat_config/rules/my_rules_DIRECT.yaml"
+    path: ./ruleset/my/DIRECT.yaml
+    interval: 86400
+  my_rules_Proxy:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/nfcbx/Git_Learn@main/cat_config/rules/my_rules_Proxy.yaml"
+    path: ./ruleset/my/Proxy.yaml
+    interval: 86400
+  my_scholar:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/nfcbx/Git_Learn@main/cat_config/rules/my_scholar.yaml"
+    path: ./ruleset/my/scholar.yaml
+    interval: 86400
   my_tencent:
     type: http
     behavior: classical
@@ -102,10 +140,28 @@ rule-providers:
     path: ./ruleset/my/tencent.yaml
     interval: 86400
 # from https://github.com/Loyalsoldier/clash-rules
-  reject:
+  # reject:
+  #   type: http
+  #   behavior: domain
+  #   url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt"
+  #   path: ./ruleset/Loyalsoldier/reject.yaml
+  #   interval: 86400
+  gfw:
     type: http
     behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt"
-    path: ./ruleset/Loyalsoldier/reject.yaml
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt"
+    path: ./ruleset/Loyalsoldier/gfw.yaml
+    interval: 86400
+  tld-not-cn:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/tld-not-cn.txt"
+    path: ./ruleset/Loyalsoldier/tld-not-cn.yaml
+    interval: 86400
+  telegramcidr:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/telegramcidr.txt"
+    path: ./ruleset/Loyalsoldier/telegramcidr.yaml
     interval: 86400
 #--------------------------------------------------------------------------------------#
