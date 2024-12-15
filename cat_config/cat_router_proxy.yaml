@@ -17,7 +17,7 @@ proxies:
     url: http://connectivitycheck.platform.hicloud.com/generate_204
     udp: false
 
-  # - name: "hysteria2"
+  # - name: "DPI 加密"
   #   type: hysteria2
   #   server: server.com
   #   port: 443
@@ -53,7 +53,7 @@ proxy-groups:
     type: select
     proxies:
       - ua3f
-      # - 607
+      - DPI 加密
       - DIRECT
     use:
       - Global-ISP
@@ -63,7 +63,7 @@ proxy-groups:
   - name: "🔒 深度包检测"
     type: select
     proxies:
-      # - 607
+      - DPI 加密
       - ua3f
       - DIRECT
     url: http://connectivitycheck.platform.hicloud.com/generate_204
@@ -71,7 +71,7 @@ proxy-groups:
   - name: "🐧 腾讯QQ&Wechat"
     type: select
     proxies:
-      # - 607
+      - DPI 加密
       - ua3f
       - DIRECT
     url: https://www.gstatic.com/generate_204
@@ -80,7 +80,7 @@ proxy-groups:
     type: select
     proxies:
       - ua3f
-      # - 607
+      - DPI 加密
       - DIRECT
       - 🔰 选择节点
     use:
