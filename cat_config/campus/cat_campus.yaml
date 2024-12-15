@@ -50,8 +50,6 @@ dns:
       "*.linksyssmartwifi.com",
       "swscan.apple.com",
       "mesu.apple.com",
-      "+.msftconnecttest.com", # Windows网络出现小地球图标
-      "+.msftncsi.com",
       "time.*.com",
       "time.*.gov",
       "time.*.edu.cn",
