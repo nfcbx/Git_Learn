@@ -1,55 +1,32 @@
-# HTTP 代理端口
-port: 7890
+# port: 7890                 #本地http代理端口
+# socks-port: 7891           #本地socks5代理端口
+mixed-port: 7890 #本地混合代理(http和socks5合并)端口
+# redir-port: 7892           #本地Linux/macOS Redir代理端口
+# tproxy-port: 7893          #本地Linux Tproxy代理端口
 
-# SOCKS5 代理端口
-socks-port: 7891
-
-# 混合端口是一个特殊的端口，它同时支持 HTTP(S) 和 SOCKS5 协议。您可以使用任何支持 HTTP 或 SOCKS 代理的程序连接到这个端口
-mixed-port: 7892
-
-# redirect 端口仅限 Linux(Android) 以及 macOS 适用，tproxy 端口仅限 linux(Android) 适用
-redir-port: 9797
-tproxy-port: 9898
-
-# 本地 SOCKS5/HTTP(S) 服务验证
-# authentication:
+# authentication:            # 本地SOCKS5/HTTP(S)代理端口认证设置
 #  - "user1:pass1"
 #  - "user2:pass2"
 
-# 允许局域网的连接（可用来共享代理）
-allow-lan: true
-bind-address: "*"
-# 此功能仅在 allow-lan 设置为 true 时生效，支持三种参数：
-# "*"                           绑定所有的 IP 地址
-# 192.168.122.11                绑定一个的 IPv4 地址
-# "[aaaa::a8aa:ff:fe09:57d8]"   绑定一个 IPv6 地址
+allow-lan: false #允许局域网连接(false/true)
+bind-address: #监听IP白名单(当allow-lan：true)，只允许列表设备
+  "*" #全部设备
+  # 192.168.122.11                #单个ip4地址
+  # "[aaaa::a8aa:ff:fe09:57d8]"   #单个ip6地址
 
-# Clash 路由工作模式
-# 规则模式：rule（规则） / global（全局代理）/ direct（全局直连）
-mode: rule
+mode: rule #clash工作模式(rule/global/direct,meta暂不支持script)
+log-level: info #日志等级(info/warning/error/debug/silent)
+ipv6: false #ip6开关，当为false时，停止解析hostanmes为ip6地址
+keep-alive-interval: 10000 # 减少移动端设备耗电
 
-# Clash 默认将日志输出至 STDOUT
-# 设置日志输出级别 (默认级别：silent，即不输出任何内容，以避免因日志内容过大而导致程序内存溢出）。
-# 5 个级别：silent / info / warning / error / debug。级别越高日志输出量越大，越倾向于调试，若需要请自行开启。
-log-level: info
+external-controller: 127.0.0.1:9090 #控制器监听地址
+# external-ui: folder                   #http服务路径，可以放静态web网页，如yacd的控制面板
+#可通过`http://{{external-controller}}/ui`直接使用
+# secret: ""                            #控制器登录密码
+global-ua: "FFF"
+# interface-name: en0        #出口网卡名称
 
-# clash 的 RESTful API 监听地址
-external-controller: 127.0.0.1:9090
-
-# global-ua: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
-
-# 存放配置文件的相对路径，或存放网页静态资源的绝对路径
-# Clash core 将会将其部署在 http://{{external-controller}}/ui
-# external-ui: folder
-
-# RESTful API 的口令 (可选)
-# 通过 HTTP 头中 Authorization: Bearer ${secret} 参数来验证口令
-# 当 RESTful API 的监听地址为 0.0.0.0 时，请务必设定口令以保证安全
-# secret: ""
-
-# 出站网卡接口
-# interface-name: en0
-
+#--------------------------------------------------------------------------------------#
 # DNS 服务器和建立连接时的 静态 Hosts, 仅在 dns.enhanced-mode 模式为 redir-host 生效
 # 支持通配符域名 (例如: *.clash.dev, *.foo.*.example.com )
 # 不使用通配符的域名优先级高于使用通配符的域名 (例如: foo.example.com > *.example.com > .example.com )
@@ -68,25 +45,74 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter-mode: blacklist
-  fake-ip-filter: ['*.lan', '*.linksys.com', '*.linksyssmartwifi.com', 'swscan.apple.com', 'mesu.apple.com', '*.msftconnecttest.com', '*.msftncsi.com', 'time.*.com', 'time.*.gov', 'time.*.edu.cn', 'time.*.apple.com', 'time1.*.com', 'time2.*.com', 'time3.*.com', 'time4.*.com', 'time5.*.com', 'time6.*.com', 'time7.*.com', 'ntp.*.com', 'ntp.*.com', 'ntp1.*.com', 'ntp2.*.com', 'ntp3.*.com', 'ntp4.*.com', 'ntp5.*.com', 'ntp6.*.com', 'ntp7.*.com', '*.time.edu.cn', '*.ntp.org.cn', '+.pool.ntp.org', 'time1.cloud.tencent.com']
-  default-nameserver: [223.5.5.5, 223.6.6.6, 119.29.29.29, 1.12.12.12, 120.53.53.53]
+  fake-ip-filter: [
+      "*.lan",
+      "+.local",
+      "*.linksys.com",
+      "*.linksyssmartwifi.com",
+      "swscan.apple.com",
+      "mesu.apple.com",
+      "+.msftconnecttest.com", # Windows网络出现小地球图标
+      "+.msftncsi.com",
+      "time.*.com",
+      "time.*.gov",
+      "time.*.edu.cn",
+      "time.*.apple.com",
+      "time1.*.com",
+      "time2.*.com",
+      "time3.*.com",
+      "time4.*.com",
+      "time5.*.com",
+      "time6.*.com",
+      "time7.*.com",
+      "ntp.*.com",
+      "ntp.*.com",
+      "ntp1.*.com",
+      "ntp2.*.com",
+      "ntp3.*.com",
+      "ntp4.*.com",
+      "ntp5.*.com",
+      "ntp6.*.com",
+      "ntp7.*.com",
+      "*.time.edu.cn",
+      "*.ntp.org.cn",
+      "+.pool.ntp.org",
+      "time1.cloud.tencent.com",
+      "+.leigod.com",
+      "+.vivox.com",
+      "+.stun.+",
+      ".n.n.srv.nintendo.net",
+      "+.stun.playstation.net",
+      "xbox.*.*.microsoft.com",
+      "*.*.xboxlive.com",
+      "lens.l.google.com",
+      "*.mcdn.bilivideo.cn",
+      "localhost.ptlogin2.qq.com",
+    ]
+  default-nameserver:
+    ["https://223.5.5.5/dns-query", "https://120.53.53.53/dns-query"]
   nameserver:
     # - 192.168.123.190
     # tencent dns
-    - https://doh.pub/dns-query
-    - https://1.12.12.12/dns-query
-    - https://120.53.53.53/dns-query
-    - https://sm2.doh.pub/dns-query
+    # - https://doh.pub/dns-query
+    # - https://1.12.12.12/dns-query
+    # - https://120.53.53.53/dns-query
+    # - https://sm2.doh.pub/dns-query
     # ali dns
-    - https://dns.alidns.com/dns-query
-    - https://223.5.5.5/dns-query
-    - https://223.6.6.6/dns-query
+    # - https://dns.alidns.com/dns-query
+    # - https://223.5.5.5/dns-query
+    # - https://223.6.6.6/dns-query
     # google dns
     - https://dns.google/dns-query
     - https://8.8.8.8/dns-query
     - https://8.8.4.4/dns-query
+    # cloudflare dns
+    - https://cloudflare-dns.com/dns-query
+    - https://1.1.1.1/dns-query
   nameserver-policy:
-    'geosite:cn,private': ['https://doh.pub/dns-query', 'https://dns.alidns.com/dns-query', 'https://223.5.5.5/dns-query', 'https://223.6.6.6/dns-query']
+    "geosite:cn,private":
+      - https://doh.pub/dns-query
+      - https://dns.alidns.com/dns-query
 #--------------------------------------------------------------------------------------#
 proxies:
 #--------------------------------------------------------------------------------------#
@@ -94,7 +120,7 @@ proxy-providers:
   Global-ISP:
     type: http
     url: ""
-    interval: 7200
+    interval: 86400 # 更新provider的时间，单位为秒
     path: "./Proxy-Providers/Global-ISP.yaml"
     health-check:
       enable: true
@@ -102,6 +128,7 @@ proxy-providers:
       timeout: 5000
       lazy: true
       expected-status: 204
+      interval: 7200 # 检查provider的时间，单位为秒
 #--------------------------------------------------------------------------------------#
 proxy-groups:
   - name: "🔰 选择节点"
@@ -111,7 +138,6 @@ proxy-groups:
     use:
       - Global-ISP
     url: https://www.gstatic.com/generate_204
-    interval: 300
 
   - name: "☁️ OneDrive"
     type: select
@@ -122,6 +148,26 @@ proxy-groups:
       - Global-ISP
     url: https://www.gstatic.com/generate_204
 
+  - name: 🎮 Steam 登录/下载
+    type: select
+    proxies:
+      - DIRECT
+      - 🔰 选择节点
+    use:
+      - Global-ISP
+    filter: "(^(?!.*?(Premium)).*(阿根廷|Argentina|AR))|^(?!.*?(Premium)).*(俄罗斯|Russia|RU)|^(?!.*?(Premium)).*(土耳其|Turkey|TR)|^(?!.*?(Premium)).*(印度|India|IN)"
+    url: https://connect.rom.miui.com/generate_204
+
+  - name: 🎮 Steam 商店/社区
+    type: select
+    proxies:
+      - 🔰 选择节点
+      - DIRECT
+    use:
+      - Global-ISP
+    filter: "(^(?!.*?(Premium)).*(阿根廷|Argentina|AR))|^(?!.*?(Premium)).*(俄罗斯|Russia|RU)|^(?!.*?(Premium)).*(土耳其|Turkey|TR)|^(?!.*?(Premium)).*(印度|India|IN)"
+    url: https://www.gstatic.com/generate_204
+
   - name: "📕 学术网站"
     type: select
     proxies:
@@ -129,20 +175,16 @@ proxy-groups:
       - 🔰 选择节点
     use:
       - Global-ISP
-    url: http://connectivitycheck.platform.hicloud.com/generate_204
+    url: https://connect.rom.miui.com/generate_204
 
-  - name: "🔒 深度包检测"
+  - name: "📀 Tiktok 流媒体"
     type: select
     proxies:
-      - DIRECT
       - 🔰 选择节点
-    url: http://connectivitycheck.platform.hicloud.com/generate_204
-
-  - name: "🐧 腾讯QQ&Wechat"
-    type: select
-    proxies:
       - DIRECT
-      - 🔰 选择节点
+    filter: "(^(?!.*?(Premium)).*(香港|Hong Kong|HK))|^(?!.*?(Premium)).*(台湾|Taiwan|TW)|^(?!.*?(Premium)).*(日本|Japan|JP)"
+    use:
+      - Global-ISP
     url: https://www.gstatic.com/generate_204
 
   - name: "🎞️ 爱奇艺&哔哩哔哩"
@@ -150,7 +192,16 @@ proxy-groups:
     proxies:
       - DIRECT
       - 🔰 选择节点
-    filter: "(^(?!.*?(Premium)).*(香港|Hong Kong|HK))|^(?!.*?(Premium)).*(台湾|Taiwan|TW)"
+    filter: "(^(?!.*?(Premium)).*(香港|Hong Kong|HK))|^(?!.*?(Premium)).*(台湾|Taiwan|TW)|^(?!.*?(Premium)).*(日本|Japan|JP)"
+    use:
+      - Global-ISP
+    url: https://connect.rom.miui.com/generate_204
+
+  - name: "🌩️ Cloudflare"
+    type: select
+    proxies:
+      - 🔰 选择节点
+      - DIRECT
     use:
       - Global-ISP
     url: https://www.gstatic.com/generate_204
@@ -160,8 +211,8 @@ proxy-groups:
     proxies:
       - DIRECT
       - 🔰 选择节点
-    url: http://connectivitycheck.platform.hicloud.com/generate_204
-    
+    url: https://connect.rom.miui.com/generate_204
+
   - name: "🛑 拦截广告"
     type: select
     proxies:
@@ -174,67 +225,37 @@ proxy-groups:
     proxies:
       - 🔰 选择节点
       - DIRECT
-  # - name: "HongKong"
-  #   type: select
-  #   filter: "^(?!.*?(Premium)).*(香港|Hong Kong|HK)"
-  #   use:
-  #     - Global-ISP
-  #   url: https://www.gstatic.com/generate_204
-  #   interval: 300
-  # - name: "Taiwan"
-  #   type: select
-  #   filter: "^(?!.*?(Premium)).*(台湾|Taiwan|TW)"
-  #   use:
-  #     - Global-ISP
-  #   url: https://www.gstatic.com/generate_204
-  #   interval: 300
-  # - name: "Singapore"
-  #   type: select
-  #   filter: "^(?!.*?(Premium)).*(新加坡|Singapore|SG)"
-  #   use:
-  #     - Global-ISP
-  #   url: https://www.gstatic.com/generate_204
-  #   interval: 300
-  # - name: "Japan"
-  #   type: select
-  #   filter: "^(?!.*?(Premium)).*(日本|Japan|JP)"
-  #   use:
-  #     - Global-ISP
-  #   url: https://www.gstatic.com/generate_204
-  #   interval: 300
-  # - name: "USA"
-  #   type: select
-  #   filter: "^(?!.*?(Premium)).*(美国|USA|US)"
-  #   use:
-  #     - Global-ISP
-  #   url: https://www.gstatic.com/generate_204
-  #   interval: 300
-
 #--------------------------------------------------------------------------------------#
 rules:
   - RULE-SET,applications,DIRECT
   - RULE-SET,my_rules_DIRECT,DIRECT
   - RULE-SET,my_rules_Proxy,🔰 选择节点
-  - RULE-SET,my_dpi,🔒 深度包检测
-  - RULE-SET,my_tencent,🐧 腾讯QQ&Wechat
-  - RULE-SET,my_scholar,📕 学术网站                #  my_scholar
-  - RULE-SET,private,DIRECT                         #  路由器
-  - RULE-SET,reject,🛑 拦截广告
+  - RULE-SET,my_scholar,📕 学术网站 #  my_scholar
+  - RULE-SET,private,DIRECT #  路由器
+  - RULE-SET,lancidr,DIRECT #  局域网段
   - RULE-SET,icloud,DIRECT
   - RULE-SET,apple,DIRECT
   - RULE-SET,google,🔰 选择节点
-  - RULE-SET,Onedrive,🔰 选择节点
-  - RULE-SET,proxy,🔰 选择节点
-  - RULE-SET,BiliBili,🎞️ 爱奇艺&哔哩哔哩             #
-  - RULE-SET,iQIYI,🎞️ 爱奇艺&哔哩哔哩                #
-  - RULE-SET,direct,🇨🇳 国内网站                      #
-  - RULE-SET,lancidr,DIRECT                          #  局域网段
-  - RULE-SET,cncidr,🇨🇳 国内网站                      #
+  - RULE-SET,Onedrive,☁️ OneDrive
+  - RULE-SET,BiliBili,🎞️ 爱奇艺&哔哩哔哩
+  - RULE-SET,iQIYI,🎞️ 爱奇艺&哔哩哔哩
+  - RULE-SET,YouTube,📀 Tiktok 流媒体
+  - RULE-SET,HBO,📀 Tiktok 流媒体
+  - RULE-SET,Disney,📀 Tiktok 流媒体
+  - RULE-SET,Netflix,📀 Tiktok 流媒体
+  - RULE-SET,Spotify,📀 Tiktok 流媒体
+  - RULE-SET,SteamCN,🎮 Steam 登录/下载
+  - RULE-SET,Steam,🎮 Steam 商店/社区
+  - RULE-SET,direct,🇨🇳 国内网站
+  - RULE-SET,cncidr,🇨🇳 国内网站
+  - RULE-SET,Cloudflare,🌩️ Cloudflare
   - RULE-SET,telegramcidr,🔰 选择节点
+  - RULE-SET,proxy,🔰 选择节点
+  - RULE-SET,reject,🛑 拦截广告
   - GEOIP,LAN,DIRECT
-  - GEOIP,CN,🇨🇳 国内网站                             #
+  - GEOIP,CN,🇨🇳 国内网站
   - MATCH,🐟 漏网之鱼
-
+#--------------------------------------------------------------------------------------#
 rule-providers:
   my_dpi:
     type: http
@@ -249,7 +270,7 @@ rule-providers:
     url: "https://cdn.jsdelivr.net/gh/nfcbx/Git_Learn@main/cat_config/rules/my_rules_DIRECT.yaml"
     path: ./ruleset/my/DIRECT.yaml
     interval: 86400
-  
+
   my_rules_Proxy:
     type: http
     behavior: classical
@@ -270,8 +291,8 @@ rule-providers:
     url: "https://cdn.jsdelivr.net/gh/nfcbx/Git_Learn@main/cat_config/rules/my_tencent.yaml"
     path: ./ruleset/my/tencent.yaml
     interval: 86400
-#--------------------------------------------------------------------------------------#
-# from https://github.com/Loyalsoldier/clash-rules
+  #--------------------------------------------------------------------------------------#
+  # from https://github.com/Loyalsoldier/clash-rules
   reject:
     type: http
     behavior: domain
@@ -362,8 +383,8 @@ rule-providers:
     url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/applications.txt"
     path: ./ruleset/Loyalsoldier/applications.yaml
     interval: 86400
-#--------------------------------------------------------------------------------------#
-# rules from https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash
+  #--------------------------------------------------------------------------------------#
+  # rules from https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash
   Onedrive:
     type: http
     behavior: classical
@@ -385,4 +406,65 @@ rule-providers:
     path: ./ruleset/blackmatrix7/iQIYI.yaml
     interval: 86400
 
-external-ui: ./dashboard
+  Cloudflare:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Cloudflare/Cloudflare.yaml"
+    path: ./ruleset/blackmatrix7/Cloudflare.yaml
+    interval: 86400
+
+  SteamCN:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/SteamCN/SteamCN.yaml"
+    path: ./ruleset/blackmatrix7/SteamCN.yaml
+    interval: 86400
+
+  Steam:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Steam/Steam.yaml"
+    path: ./ruleset/blackmatrix7/Steam.yaml
+    interval: 86400
+
+  TikTok:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/TikTok/TikTok.yaml"
+    path: ./ruleset/blackmatrix7/TikTok.yaml
+    interval: 86400
+
+  YouTube:
+    type: http
+    behavior: classical
+    url: "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/YouTube/YouTube.yaml"
+    path: ./ruleset/blackmatrix7/YouTube.yaml
+    interval: 86400
+
+  HBO:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/HBO/HBO.yaml"
+    path: ./ruleset/blackmatrix7/HBO.yaml
+    interval: 86400
+
+  Disney:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Disney/Disney.yaml"
+    path: ./ruleset/blackmatrix7/Disney.yaml
+    interval: 86400
+
+  Netflix:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Netflix/Netflix.yaml"
+    path: ./ruleset/blackmatrix7/Netflix.yaml
+    interval: 86400
+
+  Spotify:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Spotify/Spotify.yaml"
+    path: ./ruleset/blackmatrix7/Spotify.yaml
+    interval: 86400

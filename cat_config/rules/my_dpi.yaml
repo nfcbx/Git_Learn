@@ -1,6 +1,7 @@
 payload:
   # DPI防检测, 加密常用端口
   - DST-PORT,80
+  - DST-PORT,123  # NTP
   - DST-PORT,5222
   - DST-PORT,5223
   - DST-PORT,5228
@@ -8,3 +9,5 @@ payload:
   - DST-PORT,8001
   - DST-PORT,8080
   - DST-PORT,14000
+  - DOMAIN-SUFFIX,msftconnecttest.com
+  - DOMAIN-SUFFIX,msftncsi.com
