@@ -1,4 +1,6 @@
 payload:
   - DOMAIN,clash.razord.top
   - DOMAIN,yacd.haishan.me
+  - DOMAIN,ua.233996.xyz
+  - DOMAIN-SUFFIX,micu.hk,DIRECT
   - IP-CIDR,202.114.177.0/24
