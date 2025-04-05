@@ -2,8 +2,9 @@ payload:
   - DOMAIN,clash.razord.top
   - DOMAIN,yacd.haishan.me
   - DOMAIN,ua.233996.xyz
-  - DOMAIN-SUFFIX,micu.hk,DIRECT
+  - DOMAIN-SUFFIX,micu.hk
   - IP-CIDR,202.114.177.0/24
-  - IP-CIDR,208.67.222.123/32
-  - IP-CIDR,208.67.220.220/32
-  - IP-CIDR,208.67.222.222/32
+  - IP-CIDR,208.67.222.123/32   # OpenDNS DNS
+  - IP-CIDR,208.67.220.220/32   # OpenDNS DNS
+  - IP-CIDR,208.67.222.222/32   # OpenDNS DNS
+  - DST-PORT,11011              # EasyTi
