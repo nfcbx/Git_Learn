@@ -7,4 +7,5 @@ payload:
   - IP-CIDR,208.67.222.123/32   # OpenDNS DNS
   - IP-CIDR,208.67.220.220/32   # OpenDNS DNS
   - IP-CIDR,208.67.222.222/32   # OpenDNS DNS
-  - DST-PORT,11011              # EasyTi
+  # - DST-PORT,11010              # EasyTier
+  - DST-PORT,11011              # EasyTier
