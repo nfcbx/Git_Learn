@@ -1,0 +1,10 @@
+payload:
+# ------------------------------私网 IP-------------------------------------------------#
+  - SRC-IP-CIDR,192.168.8.242/32    # subs-check
+# --------------------------------------------------------------------------------------#
+  - AND,((RULE-SET,apple),(DST-PORT,443))
+  - AND,((RULE-SET,icloud),(DST-PORT,443))
+  - AND,((RULE-SET,BiliBili),(DST-PORT,443))
+  - AND,((RULE-SET,iQIYI),(DST-PORT,443))
+  - AND,((RULE-SET,cncidr),(DST-PORT,443))
+  - AND,((RULE-SET,direct),(DST-PORT,443))
