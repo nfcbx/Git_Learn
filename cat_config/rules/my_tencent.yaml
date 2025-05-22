@@ -27,7 +27,6 @@ payload:
 # DOMAIN-SUFFIX: 22
 # IP-ASN: 1
 # TOTAL: 31
-payload:
   - DOMAIN,apd-pcdnwxlogin.teg.tencent-cloud.net
   - DOMAIN,btrace.qq.com
   - DOMAIN,dldir1.qq.com

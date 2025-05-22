@@ -8,5 +8,6 @@ payload:
   - DST-PORT,8001
   - DST-PORT,8080
   - DST-PORT,14000
+  - DOMAIN-SUFFIX,api.miwifi.com
   - DOMAIN-SUFFIX,msftconnecttest.com
   - DOMAIN-SUFFIX,msftncsi.com
