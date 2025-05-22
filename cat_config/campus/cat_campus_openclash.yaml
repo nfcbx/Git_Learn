@@ -18,164 +18,194 @@ global-client-fingerprint: android
 global-ua: FFF_clash.meta_FFF
 ipv6: false
 unified-delay: true
-# external-ui: "/etc/openclash/ui"
-# external-ui-name: zashboard
-# external-ui-url: https://github.com/Zephyruso/zashboard/releases/latest/download/dist-cdn-fonts.zip
+external-ui: "/etc/openclash/ui"
+external-ui-name: zashboard
+external-ui-url: https://github.com/Zephyruso/zashboard/releases/latest/download/dist-cdn-fonts.zip
 #--------------------------------------------------------------------------------------#
 dns:
-  enable: true
-  listen: 1053
-  use-hosts: true
-  ipv6: false
-  default-nameserver:
-    ["https://223.5.5.5/dns-query", "https://120.53.53.53/dns-query"]
-  enhanced-mode: fake-ip
-  fake-ip-range: 198.18.0.1/16
-  fake-ip-filter:
-    - '*.lan'
-    - '*.localdomain'
-    - '*.example'
-    - '*.invalid'
-    - '*.localhost'
-    - '*.test'
-    - '*.local'
-    - '*.home.arpa'
-    - 'time.*.com'
-    - 'time.*.gov'
-    - 'time.*.edu.cn'
-    - 'time.*.apple.com'
-    - 'time-ios.apple.com'
-    - 'time1.*.com'
-    - 'time2.*.com'
-    - 'time3.*.com'
-    - 'time4.*.com'
-    - 'time5.*.com'
-    - 'time6.*.com'
-    - 'time7.*.com'
-    - 'ntp.*.com'
-    - 'ntp1.*.com'
-    - 'ntp2.*.com'
-    - 'ntp3.*.com'
-    - 'ntp4.*.com'
-    - 'ntp5.*.com'
-    - 'ntp6.*.com'
-    - 'ntp7.*.com'
-    - '*.time.edu.cn'
-    - '*.ntp.org.cn'
-    - '+.pool.ntp.org'
-    - 'time1.cloud.tencent.com'
-    - 'music.163.com'
-    - '*.music.163.com'
-    - '*.126.net'
-    - 'musicapi.taihe.com'
-    - 'music.taihe.com'
-    - 'songsearch.kugou.com'
-    - 'trackercdn.kugou.com'
-    - '*.kuwo.cn'
-    - 'api-jooxtt.sanook.com'
-    - 'api.joox.com'
-    - 'joox.com'
-    - 'y.qq.com'
-    - '*.y.qq.com'
-    - 'streamoc.music.tc.qq.com'
-    - 'mobileoc.music.tc.qq.com'
-    - 'isure.stream.qqmusic.qq.com'
-    - 'dl.stream.qqmusic.qq.com'
-    - 'aqqmusic.tc.qq.com'
-    - 'amobile.music.tc.qq.com'
-    - '*.xiami.com'
-    - '*.music.migu.cn'
-    - 'music.migu.cn'
-    - '+.msftconnecttest.com'
-    - '+.msftncsi.com'
-    - 'localhost.ptlogin2.qq.com'
-    - 'localhost.sec.qq.com'
-    - '+.qq.com'
-    - '+.tencent.com'
-    - '+.steamcontent.com'
-    - '+.srv.nintendo.net'
-    - '*.n.n.srv.nintendo.net'
-    - '+.cdn.nintendo.net'
-    - '+.stun.playstation.net'
-    - 'xbox.*.*.microsoft.com'
-    - '*.*.xboxlive.com'
-    - 'xbox.*.microsoft.com'
-    - 'xnotify.xboxlive.com'
-    - '+.battlenet.com.cn'
-    - '+.wotgame.cn'
-    - '+.wggames.cn'
-    - '+.wowsgame.cn'
-    - '+.wargaming.net'
-    - 'proxy.golang.org'
-    - 'stun.*.*'
-    - 'stun.*.*.*'
-    - '+.stun.*.*'
-    - '+.stun.*.*.*'
-    - '+.stun.*.*.*.*'
-    - '+.stun.*.*.*.*.*'
-    - 'heartbeat.belkin.com'
-    - '*.linksys.com'
-    - '*.linksyssmartwifi.com'
-    - '*.router.asus.com'
-    - 'mesu.apple.com'
-    - 'swscan.apple.com'
-    - 'swquery.apple.com'
-    - 'swdownload.apple.com'
-    - 'swcdn.apple.com'
-    - 'swdist.apple.com'
-    - 'lens.l.google.com'
-    - 'stun.l.google.com'
-    - 'na.b.g-tun.com'
-    - '+.nflxvideo.net'
-    - '*.square-enix.com'
-    - '*.finalfantasyxiv.com'
-    - '*.ffxiv.com'
-    - '*.ff14.sdo.com'
-    - 'ff.dorado.sdo.com'
-    - '*.mcdn.bilivideo.cn'
-    - '+.media.dssott.com'
-    - 'shark007.net'
-    - '+.market.xiaomi.com'
-    - '+.cmbchina.com'
-    - '+.cmbimg.com'
-    - 'adguardteam.github.io'
-    - 'adrules.top'
-    - 'anti-ad.net'
-    - 'local.adguard.org'
-    - 'static.adtidy.org'
-    - '+.sandai.net'
-    - '+.n0808.com'
-    - '+.3gppnetwork.org'
-    - '+.uu.163.com'
-    - 'ps.res.netease.com'
-    - '+.oray.com'
-    - '+.orayimg.com'
-  nameserver:
-    # - 192.168.123.190
-    # tencent dns
-    # - https://doh.pub/dns-query
-    # - https://1.12.12.12/dns-query
-    # - https://120.53.53.53/dns-query
-    # - https://sm2.doh.pub/dns-query
-    # ali dns
-    # - https://dns.alidns.com/dns-query
-    # - https://223.5.5.5/dns-query
-    # - https://223.6.6.6/dns-query
-    # google dns
-    - https://dns.google/dns-query
-    # - https://8.8.8.8/dns-query
-    # - https://8.8.4.4/dns-query
-    # cloudflare dns
-    - https://cloudflare-dns.com/dns-query
-    - https://1.1.1.1/dns-query
-  fallback: [https://1.0.0.1/dns-query, https://8.8.4.4/dns-query, https://dns.google/dns-query]
-  fallback-filter:
-    geoip: true
-    domain:
-      - '+.bing.com'
-      - '+.linkedin.com'
+  # enable: true
+  # listen: 1053
+  # use-hosts: true
+  # ipv6: false
+  # default-nameserver:
+  #   ["https://223.5.5.5/dns-query", "https://120.53.53.53/dns-query"]
+  # enhanced-mode: fake-ip
+  # fake-ip-range: 198.18.0.1/16
+  # fake-ip-filter:
+  #   - '*.lan'
+  #   - '*.localdomain'
+  #   - '*.example'
+  #   - '*.invalid'
+  #   - '*.localhost'
+  #   - '*.test'
+  #   - '*.local'
+  #   - '*.home.arpa'
+  #   - 'time.*.com'
+  #   - 'time.*.gov'
+  #   - 'time.*.edu.cn'
+  #   - 'time.*.apple.com'
+  #   - 'time-ios.apple.com'
+  #   - 'time1.*.com'
+  #   - 'time2.*.com'
+  #   - 'time3.*.com'
+  #   - 'time4.*.com'
+  #   - 'time5.*.com'
+  #   - 'time6.*.com'
+  #   - 'time7.*.com'
+  #   - 'ntp.*.com'
+  #   - 'ntp1.*.com'
+  #   - 'ntp2.*.com'
+  #   - 'ntp3.*.com'
+  #   - 'ntp4.*.com'
+  #   - 'ntp5.*.com'
+  #   - 'ntp6.*.com'
+  #   - 'ntp7.*.com'
+  #   - '*.time.edu.cn'
+  #   - '*.ntp.org.cn'
+  #   - '+.pool.ntp.org'
+  #   - 'time1.cloud.tencent.com'
+  #   - 'music.163.com'
+  #   - '*.music.163.com'
+  #   - '*.126.net'
+  #   - 'musicapi.taihe.com'
+  #   - 'music.taihe.com'
+  #   - 'songsearch.kugou.com'
+  #   - 'trackercdn.kugou.com'
+  #   - '*.kuwo.cn'
+  #   - 'api-jooxtt.sanook.com'
+  #   - 'api.joox.com'
+  #   - 'joox.com'
+  #   - 'y.qq.com'
+  #   - '*.y.qq.com'
+  #   - 'streamoc.music.tc.qq.com'
+  #   - 'mobileoc.music.tc.qq.com'
+  #   - 'isure.stream.qqmusic.qq.com'
+  #   - 'dl.stream.qqmusic.qq.com'
+  #   - 'aqqmusic.tc.qq.com'
+  #   - 'amobile.music.tc.qq.com'
+  #   - '*.xiami.com'
+  #   - '*.music.migu.cn'
+  #   - 'music.migu.cn'
+  #   - '+.msftconnecttest.com'
+  #   - '+.msftncsi.com'
+  #   - 'localhost.ptlogin2.qq.com'
+  #   - 'localhost.sec.qq.com'
+  #   - '+.qq.com'
+  #   - '+.tencent.com'
+  #   - '+.steamcontent.com'
+  #   - '+.srv.nintendo.net'
+  #   - '*.n.n.srv.nintendo.net'
+  #   - '+.cdn.nintendo.net'
+  #   - '+.stun.playstation.net'
+  #   - 'xbox.*.*.microsoft.com'
+  #   - '*.*.xboxlive.com'
+  #   - 'xbox.*.microsoft.com'
+  #   - 'xnotify.xboxlive.com'
+  #   - '+.battlenet.com.cn'
+  #   - '+.wotgame.cn'
+  #   - '+.wggames.cn'
+  #   - '+.wowsgame.cn'
+  #   - '+.wargaming.net'
+  #   - 'proxy.golang.org'
+  #   - 'stun.*.*'
+  #   - 'stun.*.*.*'
+  #   - '+.stun.*.*'
+  #   - '+.stun.*.*.*'
+  #   - '+.stun.*.*.*.*'
+  #   - '+.stun.*.*.*.*.*'
+  #   - 'heartbeat.belkin.com'
+  #   - '*.linksys.com'
+  #   - '*.linksyssmartwifi.com'
+  #   - '*.router.asus.com'
+  #   - 'mesu.apple.com'
+  #   - 'swscan.apple.com'
+  #   - 'swquery.apple.com'
+  #   - 'swdownload.apple.com'
+  #   - 'swcdn.apple.com'
+  #   - 'swdist.apple.com'
+  #   - 'lens.l.google.com'
+  #   - 'stun.l.google.com'
+  #   - 'na.b.g-tun.com'
+  #   - '+.nflxvideo.net'
+  #   - '*.square-enix.com'
+  #   - '*.finalfantasyxiv.com'
+  #   - '*.ffxiv.com'
+  #   - '*.ff14.sdo.com'
+  #   - 'ff.dorado.sdo.com'
+  #   - '*.mcdn.bilivideo.cn'
+  #   - '+.media.dssott.com'
+  #   - 'shark007.net'
+  #   - '+.market.xiaomi.com'
+  #   - '+.cmbchina.com'
+  #   - '+.cmbimg.com'
+  #   - 'adguardteam.github.io'
+  #   - 'adrules.top'
+  #   - 'anti-ad.net'
+  #   - 'local.adguard.org'
+  #   - 'static.adtidy.org'
+  #   - '+.sandai.net'
+  #   - '+.n0808.com'
+  #   - '+.3gppnetwork.org'
+  #   - '+.uu.163.com'
+  #   - 'ps.res.netease.com'
+  #   - '+.oray.com'
+  #   - '+.orayimg.com'
+  # nameserver:
+  #   # - 192.168.123.190
+  #   # tencent dns
+  #   # - https://doh.pub/dns-query
+  #   # - https://1.12.12.12/dns-query
+  #   # - https://120.53.53.53/dns-query
+  #   # - https://sm2.doh.pub/dns-query
+  #   # ali dns
+  #   # - https://dns.alidns.com/dns-query
+  #   # - https://223.5.5.5/dns-query
+  #   # - https://223.6.6.6/dns-query
+  #   # google dns
+  #   - https://dns.google/dns-query
+  #   # - https://8.8.8.8/dns-query
+  #   # - https://8.8.4.4/dns-query
+  #   # cloudflare dns
+  #   - https://cloudflare-dns.com/dns-query
+  #   - https://1.1.1.1/dns-query
+  # fallback: [https://1.0.0.1/dns-query, https://8.8.4.4/dns-query, https://dns.google/dns-query]
+  # fallback-filter:
+  #   geoip: true
+  #   domain:
+  #     - '+.bing.com'
+  #     - '+.linkedin.com'
+  
+  # enable: true
+  # ipv6: false
+  # enhanced-mode: redir-host
+  # listen: 0.0.0.0:7874
+  # nameserver:
+  # - 127.0.0.1:5333
+  # nameserver-policy:
+  #   geosite:category-games@cn:
+  #   - 202.114.176.10
+  #   - 202.114.176.11
 #--------------------------------------------------------------------------------------#
 proxies:
+  - name: "ua3f"
+    type: socks5
+    server: 127.0.0.1
+    port: 1080
+    url: http://www.google-analytics.com/generate_204
+    udp: false
+
+  - name: "DPI 加密"
+    type: hysteria2
+    server: 125.220.255.15
+    port: 17005
+    password: t8WdBHeuCgPvVTJdKZdzefEJB0ZFJ94WN0d5giaJfogswemk
+    up: "1000 Mbps"
+    down: "1000 Mbps"
+    sni: baidu.com
+    skip-cert-verify: true
+    fingerprint: "12:37:D1:7E:AE:D4:F6:C4:3E:49:B3:AB:7A:00:C6:A2:65:91:BD:81:1A:9E:34:4D:68:08:AC:26:B5:8B:55:2B"
+    alpn:
+      - h3
 #--------------------------------------------------------------------------------------#
 proxy-providers:
   LYQ-IKUU:
@@ -254,17 +284,34 @@ proxy-groups:
   - name: "📕 学术网站"
     type: select
     proxies:
+      - DPI 加密
+      - ua3f
       - DIRECT
       - 🔰 选择节点
-    use:
-      - LYQ-IKUU
-      - IKUU-MY
-      - rongqi-MY
+    url: http://www.google-analytics.com/generate_204
+
+  - name: "🔒 深度包检测"
+    type: select
+    proxies:
+      - DPI 加密
+      - ua3f
+      - DIRECT
+      - 🔰 选择节点
+    url: http://www.google-analytics.com/generate_204
+
+  - name: "🐧 腾讯QQ&Wechat"
+    type: select
+    proxies:
+      - DPI 加密
+      - DIRECT
+      - 🔰 选择节点
     url: http://www.google-analytics.com/generate_204
 
   - name: 🎮 Steam 登录/下载
     type: select
     proxies:
+      - ua3f
+      - DPI 加密
       - DIRECT
       - 🔰 选择节点
     use:
@@ -336,29 +383,29 @@ proxy-groups:
       - rongqi-MY
       - FREE0
     url: http://www.google-analytics.com/generate_204
-  
-  - name: "☁ Docker"
-    type: select
-    proxies:
-      - 🔰 选择节点
-      - DIRECT
-    use:
-      - LYQ-IKUU
-      - IKUU-MY
-      - rongqi-MY
-      - FREE0
-    url: http://www.google-analytics.com/generate_204
 
   - name: "🇨🇳 国内网站"
     type: select
     proxies:
+      - DPI 加密
+      - ua3f
       - DIRECT
       - 🔰 选择节点
+    url: http://www.google-analytics.com/generate_204
+  
+  - name: "🏫 校园网"
+    type: select
+    proxies:
+      - ua3f
+      - DPI 加密
+      - DIRECT
     url: http://www.google-analytics.com/generate_204
 
   - name: "🎞️ 爱奇艺&哔哩哔哩"
     type: select
     proxies:
+      - ua3f
+      - DPI 加密
       - DIRECT
       - 🔰 选择节点
     filter: "(^(?!.*?(Premium)).*(香港|Hong Kong|HK))|^(?!.*?(Premium)).*(台湾|Taiwan|TW)|^(?!.*?(Premium)).*(日本|Japan|JP)"
@@ -367,6 +414,15 @@ proxy-groups:
       - IKUU-MY
       - rongqi-MY
       - FREE0
+    url: http://www.google-analytics.com/generate_204
+
+  - name: "🇨🇳 国内443端口"
+    type: select
+    proxies:
+      - ua3f
+      - DPI 加密
+      - DIRECT
+      - 🔰 选择节点
     url: http://www.google-analytics.com/generate_204
 
   - name: "🛑 拦截广告"
@@ -380,37 +436,46 @@ proxy-groups:
     type: select
     proxies:
       - 🔰 选择节点
+      - ua3f
       - DIRECT
 #--------------------------------------------------------------------------------------#
 rules:
   - NETWORK,udp,DIRECT
+  - PROCESS-NAME,ua3f,DIRECT
   - RULE-SET,my_rules_Proxy,🔰 选择节点
-  - RULE-SET,my_scholar,📕 学术网站 #  my_scholar
-  - RULE-SET,private,DIRECT #  路由器
-  - RULE-SET,google,🔰 选择节点
-  - RULE-SET,Onedrive,☁️ OneDrive
+  - RULE-SET,my_tencent,🐧 腾讯QQ&Wechat
+  - RULE-SET,my_dpi,🔒 深度包检测
+  - RULE-SET,my_cn443,🇨🇳 国内443端口
+  - RULE-SET,my_rules_DIRECT,🏫 校园网
+
+  - RULE-SET,reject,🛑 拦截广告
+
   - RULE-SET,BiliBili,🎞️ 爱奇艺&哔哩哔哩
   - RULE-SET,iQIYI,🎞️ 爱奇艺&哔哩哔哩
-  - RULE-SET,YouTube,📀 Tiktok 流媒体
-  - RULE-SET,HBO,📀 Tiktok 流媒体
-  - RULE-SET,Disney,📀 Tiktok 流媒体
-  - RULE-SET,Netflix,📀 Tiktok 流媒体
-  - RULE-SET,Spotify,📀 Tiktok 流媒体
+  - RULE-SET,apple,🇨🇳 国内网站
+  - RULE-SET,icloud,🇨🇳 国内网站
+  - RULE-SET,cncidr,🇨🇳 国内网站
+  - RULE-SET,direct,🇨🇳 国内网站
+  - RULE-SET,my_scholar,📕 学术网站 #  my_scholar
+
+  # - RULE-SET,private,DIRECT #  路由器
+  - RULE-SET,google,🔰 选择节点
+  - RULE-SET,Onedrive,☁️ OneDrive
   - RULE-SET,SteamCN,🎮 Steam 登录/下载
   - RULE-SET,Steam,🎮 Steam 商店/社区
-  - RULE-SET,icloud,🇨🇳 国内网站
-  - RULE-SET,apple,🇨🇳 国内网站
-  - RULE-SET,direct,🇨🇳 国内网站
-  - RULE-SET,cncidr,🇨🇳 国内网站
-  - RULE-SET,Docker,☁ Docker
   - RULE-SET,Cloudflare,🌩️ Cloudflare
   - RULE-SET,OpenAI, 🤖 AI服务-OpenAI
   - RULE-SET,Claude, 🤖 AI服务-Claude&BardAI&Gemini
   - RULE-SET,BardAI, 🤖 AI服务-Claude&BardAI&Gemini
   - RULE-SET,Gemini, 🤖 AI服务-Claude&BardAI&Gemini
   - RULE-SET,telegramcidr,🔰 选择节点
+  - RULE-SET,YouTube,📀 Tiktok 流媒体
+  - RULE-SET,HBO,📀 Tiktok 流媒体
+  - RULE-SET,Disney,📀 Tiktok 流媒体
+  - RULE-SET,Netflix,📀 Tiktok 流媒体
+  - RULE-SET,Spotify,📀 Tiktok 流媒体
   - RULE-SET,proxy,🔰 选择节点
-  - RULE-SET,reject,🛑 拦截广告
+
   - GEOIP,LAN,DIRECT
   - GEOIP,CN,🇨🇳 国内网站
   - MATCH,🐟 漏网之鱼
